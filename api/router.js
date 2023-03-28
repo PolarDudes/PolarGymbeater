@@ -1,33 +1,37 @@
 import { BASE_URL, ACESS_TOKEN, USER_ID } from '@env';
 import axiox from 'axios';
 
+// Set autorization header for all requests, could be usefull
+// axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+
 class router {
     constructor() {
         this.url = BASE_URL;
         this.token = ACESS_TOKEN;
-        this.user_id = USER_ID;
-    }
-
-    get_user_information() {
-        // axiox({
-        //     method: 'get',
-        //     url: `${this.url}/v3/users/${this.user_id}`,
-        // }).then((response) => {
-        //     return response.data;
-        // })
-
-        const config = {
+        this.id = USER_ID;
+        this.config = {
             headers: {
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${this.token}`
             }
         }
+    }
 
-        axiox.get(`${this.url}/v3/users/${this.user_id}`, config)
-            .then((response) => {
-                return response.data;
-            }
-            )
+    async get_user_information() {
+        let info = ''
+
+        // return await axiox.get(`${this.url}users/${this.id}`, this.config).then((response) => {
+        //     return response.data
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+
+        await axiox.get(`${this.url}users/${this.id}`, this.config).then((response) => {
+            info = response.data
+        })
+
+        return info
+
     }
 }
 
