@@ -1,9 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import router from '../api/router';
 
 export default function App() {
-    info = router.get_user_information();
 
     return (
         <View style={styles.container}>
