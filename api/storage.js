@@ -1,8 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class Storage {
-    constructor() {
-        this._key = '@key';
+    constructor(key) {
+        this._key = key;
     }
 
     store = async (value) => {
@@ -21,6 +21,12 @@ class Storage {
         })
     }
 
+    set = async (value) => {
+        try { AsyncStorage.mergeItem(this._key, JSON.stringify(value)); }
+        catch (e) { console.error(e); }
+        // finally { console.log("Data set"); }
+    }
+
     //TODO: Add function to change values (add user class)
 
     clear = async () => {
@@ -30,4 +36,4 @@ class Storage {
     }
 }
 
-export default new Storage;
+export default Storage;
