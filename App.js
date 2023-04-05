@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 
-import Router from './api/router';
-import Loading from './pages/loading';
+import { UserContext, ExerciseContext } from './src/context';
+import Home from './pages/home';
 
 export default function App() {
-  const [ userData, setUserData ] = useState([]);
-  const [ exerciseData, setExerciseData ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
+  const [ loading, setLoading ] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     let didCancel = false;
 
-    const user = () => Router.getUser()
-      .then(response => setUserData(response))
-
-    const exercises = () => Router.getExercises()
-      .then(response => setExerciseData(response))
-
     if (!didCancel) {
-      Promise.all([ user(), exercises() ])
-        .catch(e => console.error(e))
+      Promise.all([ UserContext._currentValue, ExerciseContext._currentValue ])
+        // .then(([ user, exercises ]) => {
+        //   console.log(user, exercises);
+        // })
         .finally(() => setLoading(false));
     }
 
     return () => didCancel = true;
   }, [])
 
+  Home();
+
   return (
     <>
       {loading
         ?
-        <Loading />
+        <Text>Loading...</Text>
         : (
           <View style={{
             flex: 1,
