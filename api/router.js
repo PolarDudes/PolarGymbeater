@@ -15,7 +15,7 @@ class Router {
         return new Promise(async (resolve, reject) => {
             fetch(url, this.config)
                 .then(response => response.json())
-                .then(json => resolve(json))
+                .then(json => {resolve(json)})
                 .catch(error => reject(error))
         })
     }
