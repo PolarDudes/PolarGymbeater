@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-export default function Loading() {
+export default function Loading({ navigation }) {
     return (
         <View style={{
             flex: 1,
@@ -8,7 +8,7 @@ export default function Loading() {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
-            <Text >Loading...</Text>
+            <Text onPress={() => navigation.navigate('Home')}>Loading...</Text>
         </View>
     );
 }
