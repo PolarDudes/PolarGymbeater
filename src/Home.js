@@ -43,7 +43,7 @@ export default function App() {
                 </View>
                 : (
                     <View style={styles.container}>
-                        <Text>Home</Text>
+                        <Text>Homeeerrrrre</Text>
                         {/* <Esimerrki props={data} /> */}
                         <StatusBar style="auto" />
                     </View>
