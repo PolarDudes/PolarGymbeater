@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Router from './api/router';
 import Loading from './pages/loading';
-import Home from './pages/Home';
+import Home from './pages/home';
 
 const Stack = createNativeStackNavigator();
 
