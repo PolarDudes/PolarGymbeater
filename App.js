@@ -1,5 +1,5 @@
 import React from 'react'
-import { PolarContextProvider } from './context/context'
+import { PolarContextProvider } from './context/polarContext'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -15,7 +15,6 @@ export default function App() {
         <Loading>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Loading" k component={Loading} />
               <Stack.Screen name="Home" component={Home} />
             </Stack.Navigator>
           </NavigationContainer>

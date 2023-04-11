@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import {
   View,
   Text,
-  Button,
   FlatList,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
+import { PolarContext } from '../context/polarContext'
 
 export default function Home() {
+  const { userData } = React.useContext(PolarContext)
+  console.log(userData)
+
   const [boxes, setboxes] = useState([
     { name: 'box1', key: '1' },
     { name: 'box2', key: '2' },

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { PolarContext } from '../context/context'
+import { PolarContext } from '../context/polarContext'
 
 export default function Loading({ children }) {
   const { loading } = React.useContext(PolarContext)
