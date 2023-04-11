@@ -6,16 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native'
-import { PolarContext } from '../context/polarContext'
 
 export default function Home() {
-  const { userData } = React.useContext(PolarContext)
-  console.log(userData)
-
   const [boxes, setboxes] = useState([
-    { name: 'box1', key: '1' },
-    { name: 'box2', key: '2' },
-    { name: 'box3', key: '3' },
+    { name: 'Enter calories', key: '1' },
+    { name: 'Graph', key: '2' },
+    { name: 'Settings', key: '3' },
   ])
 
   return (
