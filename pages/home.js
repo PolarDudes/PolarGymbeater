@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native'
 
 export default function Home() {
   const [boxes, setboxes] = useState([
-    { name: "Enter calories", key: "1" },
-    { name: "Graph", key: "2" },
-    { name: "Settings", key: "3" },
-  ]);
+    { name: 'Enter calories', key: '1' },
+    { name: 'Graph', key: '2' },
+    { name: 'Settings', key: '3' },
+  ])
 
   return (
     <View style={styles.container}>
@@ -27,23 +27,23 @@ export default function Home() {
         )}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: "black",
+    backgroundColor: 'black',
   },
   item: {
     flex: 1,
     marginHorizontal: 10,
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 50,
     padding: 20,
-    backgroundColor: "red",
+    backgroundColor: 'red',
     fontSize: 24,
   },
-});
+})
