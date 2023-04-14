@@ -1,47 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { PolarContextProvider } from './context/polarContext'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Router from './api/router';
-import Loading from './pages/loading';
+import Loading from './pages/loading'
+import Home from './pages/home'
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [ userData, setUserData ] = useState([]);
-  const [ exerciseData, setExerciseData ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-
-  useEffect(() => {
-    let didCancel = false;
-
-    const user = () => Router.getUser()
-      .then(response => setUserData(response))
-
-    const exercises = () => Router.getExercises()
-      .then(response => setExerciseData(response))
-
-    if (!didCancel) {
-      Promise.all([ user(), exercises() ])
-        .catch(e => console.error(e))
-        .finally(() => setLoading(false));
-    }
-
-    return () => didCancel = true;
-  }, [])
-
   return (
     <>
-      {loading
-        ?
-        <Loading />
-        : (
-          <View style={{
-            flex: 1,
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <Text>App</Text>
-          </View>
-        )}
+      <PolarContextProvider>
+        <Loading>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Home" component={Home} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </Loading>
+      </PolarContextProvider>
     </>
-  );
+  )
 }
