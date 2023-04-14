@@ -1,49 +1,37 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import * as React from "react";
+import { View, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+
+
+const images = [
+    { id: 1, uri: require('../assets/img5.jpg') },
+    { id: 2, uri: require('../assets/img6.jpg') },
+    { id: 3, uri: require('../assets/img7.png') }
+];
 
 export default function Home() {
-  const [boxes, setboxes] = useState([
-    { name: "Enter calories", key: "1" },
-    { name: "Graph", key: "2" },
-    { name: "Settings", key: "3" },
-  ]);
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={boxes}
-        renderItem={({ item }) => (
-          <View>
-            <TouchableOpacity>
-              <Text style={styles.item}>{item.name}</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      />
-    </View>
-  );
+    return (
+        <ScrollView>
+            <View style={styles.container}>
+                {images.map(image => (
+                    <TouchableOpacity>
+                        <View key={image.id} style={{ height: 300, margin: 20, marginLeft: 10 }}>
+                            <Image
+                                source={image.uri}
+                                style={{ flex: 1, width: 370, borderRadius: 10, }}
+                            />
+                        </View>
+                    </TouchableOpacity>
+                ))}
+            </View>
+        </ScrollView>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    backgroundColor: "black",
-  },
-  item: {
-    flex: 1,
-    marginHorizontal: 10,
-    alignItems: "center",
-    marginTop: 50,
-    padding: 20,
-    backgroundColor: "red",
-    fontSize: 24,
-  },
-});
+const styles = StyleSheet.create(
+    {
+        container: {
+            backgroundColor: 'black'
+        }
+
+    });

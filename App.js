@@ -1,48 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import Router from './api/router';
-import Loading from './pages/loading';
-import Home from './pages/Home';
 
-const Stack = createNativeStackNavigator();
+import Home from './pages/home';
+import SettingsScreen from './pages/SettingsScreen';
+import Header from './components/Header';
+import DetailsScreen from './pages/DetailsScreen';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
-  const [ userData, setUserData ] = useState([]);
-  const [ exerciseData, setExerciseData ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-  const [ page, setPage ] = useState('loading')
-
-  const turnPage = (dest) => {
-    setPage(dest)
-    console.log(page)
-  }
-
-  useEffect(() => {
-    let didCancel = false;
-
-    const user = () => Router.getUser()
-      .then(response => setUserData(response))
-
-    const exercises = () => Router.getExercises()
-      .then(response => setExerciseData(response))
-
-    if (!didCancel) {
-      Promise.all([ user(), exercises() ])
-        .catch(e => console.error(e))
-        .finally(() => setLoading(false));
-    }
-
-    return () => didCancel = true;
-  }, [])
-
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Loading" k component={Loading} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
+      < Header />
+      <Tab.Navigator
+
+        screenOptions={({ route }) => ({
+          tabBarStyle: {
+            backgroundColor: 'red',
+            height: 50,
+            margin: -1
+
+          },
+          tabBarItemStyle: {
+            backgroundColor: 'red',
+            margin: 5
+          },
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Details') {
+              iconName = focused ? 'ios-list' : 'ios-list-outline';
+
+            } else if (route.name === 'Home') {
+              iconName = focused ? 'ios-home' : 'ios-home-outline';
+
+            }
+            else if (route.name === 'Settings') {
+              iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+            }
+
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'white',
+          tabBarInactiveTintColor: 'white',
+
+        })}>
+
+        <Tab.Screen name='Home' component={Home} options={{ headerShown: false }} />
+        <Tab.Screen name="Settings" component={SettingsScreen} options={{ headerShown: false }} />
+        <Tab.Screen name="Details" component={DetailsScreen} options={{ headerShown: false }} />
+
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
+
+
