@@ -73,7 +73,7 @@ export default function App() {
         <Loading>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="home" component={Tabs} />
+              <Stack.Screen name="Home" component={Tabs} />
             </Stack.Navigator>
           </NavigationContainer>
         </Loading>
