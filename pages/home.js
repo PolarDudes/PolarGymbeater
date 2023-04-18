@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native'
+import Enter from '../components/enter'
 
 const images = [
   { id: 1, uri: require('../assets/img5.jpg') },
@@ -16,15 +17,11 @@ const images = [
 export default function Home() {
   return (
     <ScrollView>
+      <Enter />
       <View style={styles.container}>
         {images.map((image) => (
           <TouchableOpacity key={image.id}>
-            <View style={{ height: 300, margin: 20, marginLeft: 10 }}>
-              <Image
-                source={image.uri}
-                style={{ flex: 1, width: 370, borderRadius: 10 }}
-              />
-            </View>
+            <Image source={image.uri} style={styles.image} />
           </TouchableOpacity>
         ))}
       </View>
@@ -35,5 +32,10 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'black',
+  },
+  image: {
+    margin: 10,
+    height: 300,
+    width: '100%',
   },
 })

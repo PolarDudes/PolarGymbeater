@@ -8,8 +8,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Loading from './pages/loading'
 import Home from './pages/home'
 import SettingsScreen from './pages/SettingsScreen'
-import Loading from './pages/loading'
-import Profile from './pages/Profile'
+// import Profile from './pages/Profile'
 
 import Header from './components/Header'
 
@@ -55,7 +54,7 @@ function Tabs() {
         />
         <Tab.Screen
           name="Profile"
-          component={Profile}
+          component={Home}
           options={{ headerShown: false }}
         />
         <Tab.Screen
