@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
+import Enter from '../components/enter'
+
 export default function Home() {
-  const [boxes, setboxes] = useState([
+  const [boxes, setBoxes] = useState([
     { name: 'Enter calories', key: '1' },
     { name: 'Graph', key: '2' },
     { name: 'Settings', key: '3' },
@@ -16,6 +18,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
+      {/* <Enter /> */}
       <FlatList
         data={boxes}
         renderItem={({ item }) => (
@@ -34,16 +37,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: 'black',
+    padding: 20,
+    paddingTop: 50,
+    backgroundColor: '#15171B',
   },
   item: {
     flex: 1,
-    marginHorizontal: 10,
     alignItems: 'center',
     marginTop: 50,
     padding: 20,
-    backgroundColor: 'red',
+    backgroundColor: '#E41717',
     fontSize: 24,
   },
 })

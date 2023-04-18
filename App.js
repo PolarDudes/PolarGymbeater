@@ -11,18 +11,14 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    // <>
-    //   <PolarContextProvider>
-    //     <Loading>
-    //       <NavigationContainer>
-    //         <Stack.Navigator screenOptions={{ headerShown: false }}>
-    //           <Stack.Screen name="Home" component={Home} />
-    //         </Stack.Navigator>
-    //       </NavigationContainer>
-    //     </Loading>
-    //   </PolarContextProvider>
-    // </>
-
-    <Enter />
+    <PolarContextProvider>
+      <Loading>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Home" component={Home} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Loading>
+    </PolarContextProvider>
   )
 }
