@@ -6,13 +6,14 @@ export default function Header() {
     return (
       <View style={styles.header}>
         <Image
-          resizeMode="cover"
+          resizeMode="contain"
           style={{
             width: 150,
             height: 90,
             marginTop: 35,
             left: 125,
             alignSelf: "baseline",
+            backgroundColor: 'transparent'
           }}
           source={require("../assets/logo.png")}
         />
@@ -23,10 +24,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    width: "10%",
     height: "15%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "transparent",
   },
 });

@@ -8,8 +8,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./pages/home";
 import SettingsScreen from "./pages/SettingsScreen";
 import Header from "./components/Header";
-import DetailsScreen from "./pages/DetailsScreen";
 import Loading from "./pages/loading";
+import Profile from "./pages/Profile";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,12 +32,12 @@ function Tabs() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === "Details") {
-              iconName = focused ? "ios-list" : "ios-list-outline";
+            if (route.name === "Settings") {
+              iconName = focused ? "ios-settings" : "ios-settings-outline";
             } else if (route.name === "Home") {
               iconName = focused ? "ios-home" : "ios-home-outline";
-            } else if (route.name === "Settings") {
-              iconName = focused ? "ios-settings" : "ios-settings-outline";
+            } else if (route.name === "Profile") {
+              iconName = focused ? "ios-person" : "ios-person-outline";
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -52,13 +52,13 @@ function Tabs() {
           options={{ headerShown: false }}
         />
         <Tab.Screen
-          name="Settings"
-          component={SettingsScreen}
+          name="Profile"
+          component={Profile}
           options={{ headerShown: false }}
         />
         <Tab.Screen
-          name="Details"
-          component={DetailsScreen}
+          name="Settings"
+          component={SettingsScreen}
           options={{ headerShown: false }}
         />
       </Tab.Navigator>
@@ -73,7 +73,7 @@ export default function App() {
         <Loading>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Home" component={Tabs} />
+              <Stack.Screen name="homeScreen" component={Tabs} />
             </Stack.Navigator>
           </NavigationContainer>
         </Loading>
