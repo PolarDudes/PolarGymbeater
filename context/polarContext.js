@@ -1,34 +1,38 @@
-import React, { useState } from 'react';
-import Router from '../api/router';
+import React, { useState } from 'react'
+import Router from '../api/router'
 
-const PolarContext = React.createContext();
+const PolarContext = React.createContext()
 
 const PolarContextProvider = ({ children }) => {
-    const [ userData, setUserData ] = useState([]);
-    const [ exerciseData, setExerciseData ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
+  const [userData, setUserData] = useState([])
+  const [exerciseData, setExerciseData] = useState([])
+  const [loading, setLoading] = useState(true)
 
-    React.useEffect(() => {
-        let didCancel = false;
+  React.useEffect(() => {
+    let didCancel = false
 
-        if (!didCancel) {
-            Promise.all([ Router.getUser(), Router.getExercises() ])
-                .then(([ user, exercises ]) => {
-                    setUserData(user);
-                    setExerciseData(exercises);
-                })
-                .catch(e => console.error('Context', e))
-                .finally(() => setLoading(false));
-        }
+    if (!didCancel) {
+      Promise.all([Router.getUser(), Router.getExercises()])
+        .then(([user, exercises]) => {
+          setUserData(user)
+          setExerciseData(exercises)
+        })
+        .catch((e) => console.error('Context', e))
+        .finally(() => setLoading(false))
+    }
 
-        return () => didCancel = true;
-    }, [])
+    return () => (didCancel = true)
+  }, [loading])
 
-    return (
-        <PolarContext.Provider value={{ userData, exerciseData, loading }} >
-            {children}
-        </PolarContext.Provider>
-    );
+  refresh = () => {
+    setLoading(true)
+  }
+
+  return (
+    <PolarContext.Provider value={{ userData, exerciseData, loading, refresh }}>
+      {children}
+    </PolarContext.Provider>
+  )
 }
 
-export { PolarContext, PolarContextProvider };
+export { PolarContext, PolarContextProvider }
