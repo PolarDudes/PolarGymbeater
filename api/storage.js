@@ -5,7 +5,7 @@ class Storage {
     this._key = key
   }
 
-  store = async (value) => {
+  storeData = async (value) => {
     try {
       AsyncStorage.setItem(this._key, JSON.stringify(value))
     } catch (e) {
@@ -14,7 +14,7 @@ class Storage {
     // finally { console.log("Data stored"); }
   }
 
-  get = async () => {
+  getData = async () => {
     return new Promise(async (resolve, reject) => {
       AsyncStorage.getItem(this._key)
         .then((value) => resolve(value != null ? JSON.parse(value) : null))
@@ -22,18 +22,18 @@ class Storage {
     })
   }
 
-  set = async (value) => {
-    try {
-      AsyncStorage.mergeItem(this._key, JSON.stringify(value))
-    } catch (e) {
-      console.error(e)
-    }
-    // finally { console.log("Data set"); }
-  }
+  // setData = async (value) => {
+  //   try {
+  //     AsyncStorage.mergeItem(this._key, JSON.stringify(value))
+  //   } catch (e) {
+  //     console.error(e)
+  //   }
+  //   // finally { console.log("Data set"); }
+  // }
 
   //TODO: Add function to change values (add user class)
 
-  clear = async () => {
+  clearData = async () => {
     try {
       AsyncStorage.clear()
     } catch (e) {
