@@ -5,7 +5,7 @@ class IntakeStorage extends Storage {
     super('@calories')
   }
 
-  store = async () => this.storeData()
+  store = async (values) => this.storeData(values)
   get = async () => this.getData()
   clear = async () => this.clearData()
 }

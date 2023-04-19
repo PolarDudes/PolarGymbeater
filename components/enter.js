@@ -7,7 +7,7 @@ import {
   TextInput,
   Button,
 } from 'react-native'
-import Storage from '../api/storage'
+import IntakeStorage from '../class/intakeStorage'
 
 export default function Enter() {
   const [expanded, setExpanded] = useState(false)
@@ -15,14 +15,11 @@ export default function Enter() {
   const [Calories, setCalories] = useState('')
   const [Data, setData] = useState([])
 
-  const storage = new Storage('@calories')
-
   React.useEffect(() => {
     let didCancel = false
 
     if (!didCancel) {
-      storage
-        .get()
+      IntakeStorage.get()
         .then((data) => {
           if (data != null) {
             setData(data)
@@ -37,11 +34,12 @@ export default function Enter() {
   const saveData = () => {
     let currentData = Data
     currentData.push({ Date: Date.now(), Food: Food, Calories: Calories })
-    storage.store(currentData)
+    IntakeStorage.store(currentData)
     setData(currentData)
     setCalories('')
     setFood('')
     setExpanded(false)
+    console.log(Data)
   }
 
   return (
