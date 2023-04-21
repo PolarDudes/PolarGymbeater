@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native'
+import Enter from '../components/enter'
 
 const images = [
   { id: 1, uri: require('../assets/img5.jpg') },
@@ -16,6 +17,7 @@ const images = [
 export default function Home() {
   return (
     <ScrollView>
+      <Enter />
       <View style={styles.container}>
         {images.map((image) => (
           <TouchableOpacity key={image.id}>

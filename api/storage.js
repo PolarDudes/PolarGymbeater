@@ -22,15 +22,6 @@ class Storage {
     })
   }
 
-  // setData = async (value) => {
-  //   try {
-  //     AsyncStorage.mergeItem(this._key, JSON.stringify(value))
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  //   // finally { console.log("Data set"); }
-  // }
-
   //TODO: Add function to change values (add user class)
 
   clearData = async () => {
@@ -38,8 +29,9 @@ class Storage {
       AsyncStorage.clear()
     } catch (e) {
       console.error(e)
+    } finally {
+      console.log('Data cleared')
     }
-    // finally { console.log("Data cleared"); }
   }
 }
 

@@ -1,13 +1,23 @@
 import Storage from '../api/storage'
 
 class UserInformation extends Storage {
+  #data = []
   constructor() {
     super('@user')
+    this.getData().then((data) => (this.#data = data))
   }
 
-  store = async () => this.storeData()
-  get = async () => this.getData()
-  clear = async () => this.clearData()
+  get = () => this.#data
+
+  store(newData) {
+    this.storeData(newData)
+    this.#data = newData
+  }
+
+  clear() {
+    this.clearData()
+    this.#data = []
+  }
 }
 
 export default new UserInformation()
