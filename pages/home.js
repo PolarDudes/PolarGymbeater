@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native'
+import Enter from '../components/enter'
 
 import Enter from '../components/enter'
 import Graph from '../pages/graph'

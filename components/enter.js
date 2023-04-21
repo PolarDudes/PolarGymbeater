@@ -13,33 +13,17 @@ export default function Enter() {
   const [expanded, setExpanded] = useState(false)
   const [Food, setFood] = useState('')
   const [Calories, setCalories] = useState('')
-  const [Data, setData] = useState([])
-
-  React.useEffect(() => {
-    let didCancel = false
-
-    if (!didCancel) {
-      IntakeStorage.get()
-        .then((data) => {
-          if (data != null) {
-            setData(data)
-          }
-        })
-        .catch((e) => console.error(e))
-    }
-
-    return () => (didCancel = true)
-  }, [])
+  const [Data, setData] = useState(IntakeStorage.get())
 
   const saveData = () => {
     let currentData = Data
     currentData.push({ Date: Date.now(), Food: Food, Calories: Calories })
     IntakeStorage.store(currentData)
     setData(currentData)
+
     setCalories('')
     setFood('')
     setExpanded(false)
-    console.log(Data)
   }
 
   return (
@@ -47,18 +31,23 @@ export default function Enter() {
       {expanded ? (
         <View style={styles.main}>
           <TextInput
-            placeholder="What did you eat?"
-            style={styles.input}
-            onChangeText={(text) => setFood(text)}
-            value={Food}
             autoFocus={true}
+            onChangeText={(text) => setFood(text)}
+            onSubmitEditing={() => this.calories.focus()}
+            placeholder="What did you eat?"
+            returnKeyType="next"
+            style={styles.input}
+            value={Food}
           />
           <TextInput
-            placeholder="Enter calories"
-            style={styles.input}
+            keyboardType="number-pad"
             onChangeText={(text) => setCalories(text)}
+            onSubmitEditing={() => saveData()}
+            placeholder="Enter calories"
+            ref={(input) => (this.calories = input)}
+            returnKeyType="done"
+            style={styles.input}
             value={Calories}
-            keyboardType="numeric"
           />
           <Button title="Submit" onPress={() => saveData()} />
         </View>
