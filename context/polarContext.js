@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Router from '../api/router'
 
+import Loading from '../pages/loading'
+
 const PolarContext = React.createContext()
 
 const PolarContextProvider = ({ children }) => {
@@ -29,9 +31,15 @@ const PolarContextProvider = ({ children }) => {
   }
 
   return (
-    <PolarContext.Provider value={{ userData, exerciseData, loading, refresh }}>
-      {children}
-    </PolarContext.Provider>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <PolarContext.Provider value={{ userData, exerciseData, refresh }}>
+          {children}
+        </PolarContext.Provider>
+      )}
+    </>
   )
 }
 
