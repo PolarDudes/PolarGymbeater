@@ -1,11 +1,5 @@
-import * as React from 'react'
-import {
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native'
+import React from 'react'
+import { ScrollView } from 'react-native'
 
 import Enter from '../components/enter'
 import Graph from '../pages/graph'
