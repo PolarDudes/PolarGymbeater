@@ -1,41 +1,14 @@
-import * as React from 'react'
-import {
-  View,
-  Image,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native'
-import Enter from '../components/enter'
+import React from 'react'
+import { ScrollView } from 'react-native'
 
-const images = [
-  { id: 1, uri: require('../assets/img5.jpg') },
-  { id: 2, uri: require('../assets/img6.jpg') },
-  { id: 3, uri: require('../assets/img7.png') },
-]
+import Enter from '../components/enter'
+import Graph from '../pages/graph'
 
 export default function Home() {
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: '#15171B', padding: 10 }}>
       <Enter />
-      <View style={styles.container}>
-        {images.map((image) => (
-          <TouchableOpacity key={image.id}>
-            <View style={{ height: 300, margin: 20, marginLeft: 10 }}>
-              <Image
-                source={image.uri}
-                style={{ flex: 1, width: 370, borderRadius: 10 }}
-              />
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <Graph />
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-  },
-})

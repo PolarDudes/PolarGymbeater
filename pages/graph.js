@@ -1,16 +1,15 @@
-import React from "react";
-import { LineChart } from "react-native-chart-kit";
-import { useContext } from "react";
-import { PolarContext } from "../context/polarContext.js";
-import { Text, StyleSheet, Dimensions } from "react-native";
+import React from 'react'
+import { LineChart } from 'react-native-chart-kit'
+import { useContext } from 'react'
+import { PolarContext } from '../context/polarContext.js'
+import { Text, StyleSheet, Dimensions } from 'react-native'
 
 const Graph = () => {
-  const { exerciseData } = useContext(PolarContext);
-  datas = exerciseData[0]["calories"] + exerciseData[1]["calories"];
+  const { exerciseData } = useContext(PolarContext)
+  datas = exerciseData[0]['calories'] + exerciseData[1]['calories']
 
   return (
     <>
-      <Text style={styles.header}>Total calories </Text>
       <LineChart
         data={{
           //labels: ["days:"],
@@ -29,13 +28,13 @@ const Graph = () => {
         }}
         withShadow={false}
         withDots={true}
-        width={Dimensions.get("window").width - 16}
+        width={Dimensions.get('window').width - 16}
         height={250}
-        yAxisLabel={""}
+        yAxisLabel={''}
         chartConfig={{
-          backgroundColor: "#1cc910",
-          backgroundGradientFrom: "#000000",
-          backgroundGradientTo: "#E41717",
+          backgroundColor: '#1cc910',
+          backgroundGradientFrom: '#000000',
+          backgroundGradientTo: '#E41717',
           decimalPlaces: 2,
           color: (opacity = 255) => `rgba(255, 255, 255, ${opacity})`,
 
@@ -51,16 +50,16 @@ const Graph = () => {
         }}
       />
     </>
-  );
-};
+  )
+}
 
-export default Graph;
+export default Graph
 
 const styles = StyleSheet.create({
   header: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 18,
     padding: 16,
     marginTop: 16,
   },
-});
+})
