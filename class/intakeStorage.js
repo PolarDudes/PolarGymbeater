@@ -4,7 +4,11 @@ class IntakeStorage extends Storage {
   #data = []
   constructor() {
     super('@calories')
-    this.getData().then((data) => (this.#data = data))
+    this.getData()
+      .then((data) => {
+        if (data) this.#data = data
+      })
+      .catch((err) => console.log(err))
   }
 
   get = () => this.#data
