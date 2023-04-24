@@ -37,8 +37,8 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
   }, [item.isExpanded]);
 
   var arrayimg = [
-    require("../assets/ugkt38i6.bmp"), 
-    require("../assets/favicon.png")
+    require("../assets/32213.png"), 
+    require("../assets/32214.png")
   ]
    
   return (
@@ -54,8 +54,8 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
         <Text  style={styles.clrText}> clr</Text>
         <Image 
               style={{ 
-                width: 30,
-                height: 30,
+                width: 20,
+                height: 20,
                 flex: 1,
                 alignSelf: 'flex-end'
               }}
@@ -104,17 +104,14 @@ const App = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   //sssss
     const array = [...listDataSource];
-    if (multiSelect) {
-      // If multiple select is enabled
-      array[index]['isExpanded'] = !array[index]['isExpanded'];
-    } else {
+    
       // If single select is enabled
       array.map((value, placeindex) =>
         placeindex === index
           ? (array[placeindex]['isExpanded'] = !array[placeindex]['isExpanded'])
           : (array[placeindex]['isExpanded'] = false)
       );
-    }
+    
     setListDataSource(array);
   };
 
@@ -122,18 +119,7 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', padding: 10 }}>
-          <Text style={styles.titleText}>Expandable List View</Text>
-          <TouchableOpacity onPress={() => setMultiSelect(!multiSelect)}>
-            <Text
-              style={{
-                textAlign: 'center',
-                justifyContent: 'center',
-              }}>
-              {multiSelect
-                ? 'Enable Single \n Expand'
-                : 'Enalble Multiple \n Expand'}
-            </Text>
-            </TouchableOpacity>
+          
           
         </View>
         <ScrollView>
