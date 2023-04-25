@@ -18,6 +18,7 @@ import {
 } from 'react-native'
 
 import IntakeStorage from '../class/intakeStorage'
+import getCalories from '../script/getCalories'
 
 const ExpandableComponent = ({ item, onClickFunction }) => {
   //Custom Component for the Expandable List
@@ -74,10 +75,15 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
             <TouchableOpacity
               key={key}
               onPress={() => alert('Id: ' + item.id + ' val: ' + item.val)}
+              style={{
+                flexDirection: 'row',
+                gap: 10,
+              }}
             >
-              <Text style={styles.text}>
-                {key}. {item.id}: {item.val}
+              <Text style={[styles.text, { flex: 1 }]}>
+                {new Date(item.date).getMinutes()} {item.id}
               </Text>
+              <Text style={[styles.text, { flex: 1 }]}>{item.val}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -92,26 +98,7 @@ const App = (props) => {
   const [multiSelect, setMultiSelect] = useState(false)
 
   useEffect(() => {
-    let total = 0
-    let subcategory = []
-    if (IntakeStorage.get().length > 0) {
-      IntakeStorage.get().forEach(
-        (element) => {
-          total += Number(element.calories)
-          subcategory.push({ id: element.food, val: element.calories })
-        },
-        [props.onDataChange]
-      )
-    }
-
-    setListDataSource([
-      {
-        isExpanded: false,
-        category_name: 'Breakfast',
-        total: total,
-        subcategory: subcategory,
-      },
-    ])
+    setListDataSource(getCalories())
   }, [props.onDataChange])
 
   if (Platform.OS === 'android') {
@@ -191,10 +178,10 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
+    flex: 1,
   },
   row: {
     flexDirection: 'row',
-    flex: 1,
   },
 })
 

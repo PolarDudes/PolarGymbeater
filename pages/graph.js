@@ -45,7 +45,7 @@ const Graph = (props) => {
     <>
       <LineChart
         data={{
-          //labels: ["days:"],
+          // labels: ['days:'],
 
           datasets: [
             {
