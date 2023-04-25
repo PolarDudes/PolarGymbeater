@@ -18,6 +18,7 @@ import {
 } from 'react-native'
 
 import IntakeStorage from '../class/intakeStorage'
+import getCalories from '../script/getCalories'
 
 const ExpandableComponent = ({ item, onClickFunction }) => {
   //Custom Component for the Expandable List
@@ -73,12 +74,16 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
           {item.subcategory.map((item, key) => (
             <TouchableOpacity
               key={key}
-              style={styles.content}
               onPress={() => alert('Id: ' + item.id + ' val: ' + item.val)}
+              style={{
+                flexDirection: 'row',
+                gap: 10,
+              }}
             >
-              <Text style={styles.text}>
-                {key}. {item.id}: {item.val}
+              <Text style={[styles.text, { flex: 1 }]}>
+                {new Date(item.date).getMinutes()} {item.id}
               </Text>
+              <Text style={[styles.text, { flex: 1 }]}>{item.val}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -93,27 +98,7 @@ const App = (props) => {
   const [multiSelect, setMultiSelect] = useState(false)
 
   useEffect(() => {
-    let total = 0
-    let subcategory = []
-    IntakeStorage.get().forEach((element) => {
-      console.log(element)
-      console.log(typeof Number(element.calories))
-      total += Number(element.calories)
-      subcategory.push({ id: element.food, val: element.calories })
-    })
-
-    console.log('Subcategory', subcategory)
-
-    setListDataSource([
-      {
-        isExpanded: false,
-        category_name: 'Breakfast',
-        total: total,
-        subcategory: subcategory,
-      },
-    ])
-
-    console.log('ListDataSource', listDataSource)
+    setListDataSource(getCalories())
   }, [props.onDataChange])
 
   if (Platform.OS === 'android') {
@@ -124,7 +109,6 @@ const App = (props) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     //sssss
     const array = [...listDataSource]
-    console.log(array)
 
     // If single select is enabled
     array.map((value, placeindex) =>
@@ -158,7 +142,6 @@ const App = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#8D97B9',
     flex: 1,
   },
   titleText: {
@@ -195,13 +178,10 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-  },
-  content: {
-    backgroundColor: '#8D97B9',
+    flex: 1,
   },
   row: {
     flexDirection: 'row',
-    flex: 1,
   },
 })
 

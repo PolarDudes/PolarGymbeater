@@ -9,21 +9,23 @@ import {
 } from 'react-native'
 import IntakeStorage from '../class/intakeStorage'
 
-export default function Enter() {
+export default function Enter(props) {
   const [expanded, setExpanded] = useState(false)
-  const [Food, setFood] = useState('')
-  const [Calories, setCalories] = useState('')
-  const [Data, setData] = useState(IntakeStorage.get())
+  const [food, setFood] = useState('')
+  const [calories, setCalories] = useState('')
+  const [data, setData] = useState(IntakeStorage.get())
 
   const saveData = () => {
-    let currentData = Data
-    currentData.push({ Date: Date.now(), Food: Food, Calories: Calories })
+    let currentData = IntakeStorage.get()
+    currentData.push({ date: Date.now(), food: food, calories: calories })
     IntakeStorage.store(currentData)
     setData(currentData)
 
     setCalories('')
     setFood('')
     setExpanded(false)
+
+    props.onDataChange()
   }
 
   return (
@@ -37,7 +39,7 @@ export default function Enter() {
             placeholder="What did you eat?"
             returnKeyType="next"
             style={styles.input}
-            value={Food}
+            value={food}
           />
           <TextInput
             keyboardType="number-pad"
@@ -47,7 +49,7 @@ export default function Enter() {
             ref={(input) => (this.calories = input)}
             returnKeyType="done"
             style={styles.input}
-            value={Calories}
+            value={calories}
           />
           <Button title="Submit" onPress={() => saveData()} />
         </View>
