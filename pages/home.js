@@ -17,15 +17,7 @@ export default function Home() {
       <Enter onDataChange={() => refreshData()} />
       <Graph onDataChange={refresh} />
       <History onDataChange={refresh} />
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Button
-          title="Reset"
-          onPress={() => {
-            IntakeStorage.clear()
-            refreshData()
-          }}
-        />
-      </View>
+      
     </ScrollView>
   )
 }
