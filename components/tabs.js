@@ -5,6 +5,7 @@ import Home from '../pages/home'
 import History from '../pages/history'
 import Header from '../components/Header'
 import Profile from '../pages/Profile'
+import InfoScreen from '../pages/InfoScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -62,11 +63,6 @@ export default function Tabs() {
         <Tab.Screen
           name="Info"
           component={InfoScreen}
-          options={{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="History"
-          component={History}
           options={{ headerShown: false }}
         />
       </Tab.Navigator>
