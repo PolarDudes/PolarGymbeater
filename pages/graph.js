@@ -53,9 +53,9 @@ const Graph = (props) => {
               color: (opacity = 255) => `rgba(51, 255, 255, ${opacity})`,
             },
             {
-              data: [10, 10, 10, 10, 10, 10, 10, 10, 10],
-              color: (opacity = 255) => `rgba(255, 255, 255, ${opacity})`,
-              withDots: false,
+              data: [2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],
+              color: (opacity = 255) => `rgba(102, 240, 0, ${opacity})`,
+              withDots: true,
             },
           ],
         }}
