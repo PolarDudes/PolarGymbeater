@@ -1,11 +1,8 @@
 import React from 'react'
-import { ScrollView, View, Button } from 'react-native'
-
-import IntakeStorage from '../class/intakeStorage.js'
+import { ScrollView } from 'react-native'
 
 import Enter from '../components/enter'
-import Graph from './graph'
-import History from './historyforgraph.js'
+import HeartBeat from '../components/heartbeat'
 
 export default function Home() {
   const [refresh, setRefresh] = React.useState(false)
@@ -15,9 +12,16 @@ export default function Home() {
   return (
     <ScrollView style={{ backgroundColor: '#15171B', padding: 10 }}>
       <Enter onDataChange={() => refreshData()} />
-      <Graph onDataChange={refresh} />
-      <History onDataChange={refresh} />
-      
+      <HeartBeat />
+      {/* <View style={{ flex: 1, justifyContent: 'center' }}>
+        <Button
+          title="Reset"
+          onPress={() => {
+            IntakeStorage.clear()
+            refreshData()
+          }}
+        />
+      </View> */}
     </ScrollView>
   )
 }

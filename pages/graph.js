@@ -6,7 +6,7 @@ import { Text, StyleSheet, Dimensions } from 'react-native'
 
 import IntakeStorage from '../class/intakeStorage.js'
 
-const Graph = (props) => {
+const Graph = () => {
   const { exerciseData } = useContext(PolarContext)
   const [calorieData, setCalorieData] = React.useState([])
 
@@ -27,7 +27,6 @@ const Graph = (props) => {
         })
       })
     }
-    console.log('Graph', data)
 
     data.sort((a, b) => a['date'] - b['date'])
 
@@ -38,8 +37,7 @@ const Graph = (props) => {
       )
     })
     setCalorieData(currentCalories)
-    console.log('CalorieData', calorieData)
-  }, [props.onDataChange])
+  }, [])
 
   return (
     <>
@@ -60,10 +58,8 @@ const Graph = (props) => {
           ],
         }}
         withShadow={false}
-        withDots={true}
         width={Dimensions.get('window').width - 16}
         height={250}
-        yAxisLabel={''}
         chartConfig={{
           backgroundColor: '#1cc910',
           backgroundGradientFrom: '#000000',

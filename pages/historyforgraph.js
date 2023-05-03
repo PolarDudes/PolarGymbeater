@@ -93,13 +93,13 @@ const ExpandableComponent = ({ item, onClickFunction }) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   const [listDataSource, setListDataSource] = useState([])
   const [multiSelect, setMultiSelect] = useState(false)
 
   useEffect(() => {
     setListDataSource(getCalories())
-  }, [props.onDataChange])
+  }, [])
 
   if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental(true)

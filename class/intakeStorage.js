@@ -35,7 +35,6 @@ class IntakeStorage extends Storage {
     this.getData()
       .then((data) => {
         if (data) this.#data = [...this.#data, ...data]
-        console.log('IntakeStorage', JSON.stringify(this.#data))
       })
       .catch((err) => console.log(err))
   }
