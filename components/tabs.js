@@ -2,10 +2,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import Home from '../pages/home'
-import InfoScreen from '../pages/InfoScreen'
+import History from '../pages/history'
 import Header from '../components/Header'
-import Profile from "../pages/Profile";
-
+import Profile from '../pages/Profile'
+import InfoScreen from '../pages/InfoScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -28,7 +28,11 @@ export default function Tabs() {
             let iconName
 
             if (route.name === 'Info') {
-              iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline'
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline'
+            } else if (route.name === 'History') {
+              iconName = focused ? 'newspaper' : 'newspaper-outline'
             } else if (route.name === 'Home') {
               iconName = focused ? 'ios-home' : 'ios-home-outline'
             } else if (route.name === 'Profile') {
@@ -47,8 +51,12 @@ export default function Tabs() {
           options={{ headerShown: false }}
         />
         <Tab.Screen
+          name="History"
+          component={History}
+          options={{ headerShown: false }}
+        />
+        <Tab.Screen
           name="Profile"
-          //   component={Profile}
           component={Profile}
           options={{ headerShown: false }}
         />
