@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,27 +6,25 @@ import {
   View,
   TextInput,
   Button,
-} from 'react-native'
-import IntakeStorage from '../class/intakeStorage'
+} from "react-native";
+import IntakeStorage from "../class/intakeStorage";
 
-export default function Enter(props) {
-  const [expanded, setExpanded] = useState(false)
-  const [food, setFood] = useState('')
-  const [calories, setCalories] = useState('')
-  const [data, setData] = useState(IntakeStorage.get())
+export default function Enter() {
+  const [expanded, setExpanded] = useState(false);
+  const [food, setFood] = useState("");
+  const [calories, setCalories] = useState("");
+  const [data, setData] = useState(IntakeStorage.get());
 
   const saveData = () => {
-    let currentData = IntakeStorage.get()
-    currentData.push({ date: Date.now(), food: food, calories: calories })
-    IntakeStorage.store(currentData)
-    setData(currentData)
+    let currentData = IntakeStorage.get();
+    currentData.push({ date: Date.now(), food: food, calories: calories });
+    IntakeStorage.store(currentData);
+    setData(currentData);
 
-    setCalories('')
-    setFood('')
-    setExpanded(false)
-
-    props.onDataChange()
-  }
+    setCalories("");
+    setFood("");
+    setExpanded(false);
+  };
 
   return (
     <>
@@ -59,22 +57,22 @@ export default function Enter(props) {
         </TouchableOpacity>
       )}
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#EBEEF0',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#EBEEF0",
     borderRadius: 10,
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     fontSize: 20,
-    alignItems: 'center',
+    alignItems: "center",
   },
-})
+});

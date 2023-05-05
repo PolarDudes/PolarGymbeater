@@ -47,9 +47,4 @@ const styles = StyleSheet.create({
     top: "24%",
     left: "16%",
   },
-  overflow: {
-    flexDirection: "row",
-    alignItems: "center",
-    overflow: "visible",
-  },
 });
