@@ -12,9 +12,7 @@ export default function HeartBeat() {
   const max = Math.max(exerciseData.map((i) => i.heart_rate.maximum));
 
   return (
-    <View
-      style={{ flex: 1, flexDirection: "row", justifyContent: "space-evenly" }}
-    >
+    <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
       <Beat title={"Avg"} value={average} />
       <Beat title={"Max"} value={max} />
     </View>
