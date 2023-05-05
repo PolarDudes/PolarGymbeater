@@ -1,55 +1,33 @@
-import Storage from '../api/storage'
+import Storage from "../api/storage";
 
-const dummyData = [
-  {
-    date: 1682226176386,
-    food: 'Bourbon',
-    calories: 103,
-  },
-  {
-    date: 1682136176385,
-    food: 'Cider',
-    calories: 74,
-  },
-  {
-    date: 1682316176385,
-    food: 'Absinthe',
-    calories: 153,
-  },
-  {
-    date: 1682226176385,
-    food: 'Brandy',
-    calories: 94,
-  },
-  {
-    date: 1682316176386,
-    food: 'Advocaat',
-    calories: 125,
-  },
-]
+import dummyData from "../example/intakeData";
 
 class IntakeStorage extends Storage {
-  #data = dummyData
+  #data = dummyData;
   constructor() {
-    super('@calories')
+    super("@calories");
     this.getData()
       .then((data) => {
-        if (data) this.#data = [...this.#data, ...data]
+        if (data) this.#data = [...this.#data, ...data];
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   }
 
-  get = () => this.#data
+  get = () => {
+    console.log("storage", this.#data);
+    return this.#data;
+  };
 
   store(newData) {
-    this.storeData(newData)
-    this.#data = newData
+    this.storeData(newData);
+    this.#data = newData;
   }
 
-  clear() {
-    this.clearData()
-    this.#data = []
-  }
+  clear = () => {
+    this.clearData();
+    console.log("dummy", dummyData);
+    this.#data = dummyData;
+  };
 }
 
-export default new IntakeStorage()
+export default new IntakeStorage();
