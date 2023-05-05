@@ -11,10 +11,16 @@ export default function Beat(props) {
   return (
     <View style={styles.box}>
       <View>
-        <HeartbeatAnimation>
-          <Ionicons name="heart" style={styles.heartIcon} />
-          <Ionicons name="pulse-outline" style={styles.pulseIcon} />
+        <HeartbeatAnimation heartRate={props.value}>
+          <Ionicons
+            name="heart"
+            style={{
+              color: "#E41717",
+              fontSize: width / iconDiv,
+            }}
+          />
         </HeartbeatAnimation>
+        <Ionicons name="pulse-outline" style={styles.pulseIcon} />
       </View>
       <Text style={{ color: "#E41717", fontSize: width / (iconDiv + 15) }}>
         {props.title} {props.value}
@@ -34,15 +40,16 @@ const styles = StyleSheet.create({
     height: width / boxDiv,
     backgroundColor: "#15171B",
   },
-  heartIcon: {
-    color: "#E41717",
-    fontSize: width / iconDiv,
-  },
   pulseIcon: {
     ...StyleSheet.absoluteFillObject,
     fontSize: width / (iconDiv + 3),
-    color: "#fff",
-    top: width / (iconDiv + 14),
-    left: width / (iconDiv + 14),
+    color: "#15171B",
+    top: "24%",
+    left: "16%",
+  },
+  overflow: {
+    flexDirection: "row",
+    alignItems: "center",
+    overflow: "visible",
   },
 });

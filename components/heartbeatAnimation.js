@@ -1,38 +1,34 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Animated } from "react-native";
 
-class HeartbeatAnimation extends Component {
-  state = {
-    pulse: new Animated.Value(1),
+const HeartbeatAnimation = ({ heartRate, children }) => {
+  const [pulse] = useState(new Animated.Value(1));
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(pulse, {
+          toValue: 1.2,
+          duration: 50,
+          useNativeDriver: true,
+        }),
+        Animated.timing(pulse, {
+          toValue: 1,
+          duration: 50,
+          useNativeDriver: true,
+        }),
+        Animated.delay(60000 / heartRate),
+      ])
+    );
+    animation.start();
+    return () => animation.stop();
+  }, [pulse]);
+
+  const pulseStyle = {
+    transform: [{ scale: pulse }],
   };
 
-  componentDidMount() {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(this.state.pulse, {
-          toValue: 1.2,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-        Animated.timing(this.state.pulse, {
-          toValue: 1,
-          duration: 100,
-          useNativeDriver: true,
-        }),
-        Animated.delay(1000),
-      ])
-    ).start();
-  }
-
-  render() {
-    const { style, children } = this.props;
-    const pulseStyle = {
-      transform: [{ scale: this.state.pulse }],
-    };
-    return (
-      <Animated.View style={[style, pulseStyle]}>{children}</Animated.View>
-    );
-  }
-}
+  return <Animated.View style={pulseStyle}>{children}</Animated.View>;
+};
 
 export default HeartbeatAnimation;
