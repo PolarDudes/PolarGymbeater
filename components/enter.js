@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,23 +6,28 @@ import {
   View,
   TextInput,
   Button,
+  Pressable,
 } from "react-native";
+
 import IntakeStorage from "../class/intakeStorage";
+import { PolarContext } from "../context/polarContext";
 
 export default function Enter() {
   const [expanded, setExpanded] = useState(false);
   const [food, setFood] = useState("");
   const [calories, setCalories] = useState("");
-  const [data, setData] = useState(IntakeStorage.get());
+  const { reload } = useContext(PolarContext);
 
   const saveData = () => {
-    let currentData = IntakeStorage.get();
-    currentData.push({ date: Date.now(), food: food, calories: calories });
-    IntakeStorage.store(currentData);
-    setData(currentData);
+    if (food !== "" && calories !== "") {
+      let currentData = IntakeStorage.get();
+      currentData.push({ date: Date.now(), food: food, calories: calories });
+      IntakeStorage.store(currentData);
 
-    setCalories("");
-    setFood("");
+      setCalories("");
+      setFood("");
+      reload();
+    }
     setExpanded(false);
   };
 
