@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text,StyleSheet } from 'react-native';
 
+//Basic infoscreen with text and style
 export default function InfoScreen() {
     return (
       <View style={{ flex: 1, alignItems: 'flex-start', marginTop:30, marginLeft:20 }}>
@@ -26,6 +27,7 @@ export default function InfoScreen() {
       </View>
     );
   }
+  
 const styles = StyleSheet.create({
   teksti: {
     marginTop:10,

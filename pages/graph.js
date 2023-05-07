@@ -1,21 +1,21 @@
 import React from 'react'
-import { LineChart } from 'react-native-chart-kit'
+import { LineChart } from 'react-native-chart-kit' //You will need to install and import this to make the graph work, npm install react-native-chart-kit
 import { useContext } from 'react'
 import { PolarContext } from '../context/polarContext.js'
-import { Text, StyleSheet, Dimensions } from 'react-native'
-
+import { Dimensions } from 'react-native'
 import IntakeStorage from '../class/intakeStorage.js'
 
+
 const Graph = (props) => {
-  const { exerciseData } = useContext(PolarContext)
-  const [calorieData, setCalorieData] = React.useState([])
+  const { exerciseData } = useContext(PolarContext) //fetching the data we need from the polarcontext
+  const [calorieData, setCalorieData] = React.useState([])  
 
   React.useEffect(() => {
     const data = []
     exerciseData.forEach((exercise) => {
       data.push({
         date: Date.parse(exercise['start_time']),
-        calories: -exercise['calories'],
+        calories: -exercise['calories'],  //Making the graph show lost calories in negative numbers
       })
     })
 
@@ -23,7 +23,7 @@ const Graph = (props) => {
       IntakeStorage.get().forEach((intake) => {
         data.push({
           date: intake['date'],
-          calories: intake['calories'],
+          calories: intake['calories'], //getting date and calories from storage
         })
       })
     }
@@ -43,9 +43,8 @@ const Graph = (props) => {
 
   return (
     <>
-      <LineChart
+      <LineChart //the type of the graph from react native chart kit
         data={{
-          // labels: ['days:'],
 
           datasets: [
             {
@@ -53,7 +52,7 @@ const Graph = (props) => {
               color: (opacity = 255) => `rgba(51, 255, 255, ${opacity})`,
             },
             {
-              data: [2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],
+              data: [2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500], //Calorie target, hard coded for now
               color: (opacity = 255) => `rgba(102, 240, 0, ${opacity})`,
               withDots: true,
             },
@@ -75,7 +74,7 @@ const Graph = (props) => {
             borderRadius: 16,
           },
         }}
-        bezier
+        bezier //Graph type to make the corners smooth
         style={{
           marginVertical: 10,
           marginHorizontal: 7,
@@ -87,12 +86,3 @@ const Graph = (props) => {
 }
 
 export default Graph
-
-const styles = StyleSheet.create({
-  header: {
-    textAlign: 'center',
-    fontSize: 18,
-    padding: 16,
-    marginTop: 16,
-  },
-})
