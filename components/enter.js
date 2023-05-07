@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Button,
+  Pressable,
 } from "react-native";
 
 import IntakeStorage from "../class/intakeStorage";
@@ -18,14 +19,16 @@ export default function Enter() {
   const { reload } = useContext(PolarContext);
 
   const saveData = () => {
-    let currentData = IntakeStorage.get();
-    currentData.push({ date: Date.now(), food: food, calories: calories });
-    IntakeStorage.store(currentData);
+    if (food !== "" && calories !== "") {
+      let currentData = IntakeStorage.get();
+      currentData.push({ date: Date.now(), food: food, calories: calories });
+      IntakeStorage.store(currentData);
 
-    setCalories("");
-    setFood("");
+      setCalories("");
+      setFood("");
+      reload();
+    }
     setExpanded(false);
-    reload();
   };
 
   return (
