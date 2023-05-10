@@ -7,7 +7,7 @@ const { width } = Dimensions.get('window')
 const boxDiv = 2.5
 const iconDiv = 4
 
-export default function Beat(props) {
+export default function Heart(props) {
   return (
     <View style={styles.box}>
       <View>

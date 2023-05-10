@@ -1,20 +1,25 @@
 import { useContext } from 'react'
 import { View } from 'react-native'
 import { PolarContext } from '../context/polarContext'
-import Beat from './heart'
+import Heart from './heart'
 
 export default function HeartBeat() {
   const { exerciseData } = useContext(PolarContext)
+  let average = 0
+  let max = 0
 
-  const average =
-    exerciseData.map((i) => i.heart_rate.average).reduce((a, b) => a + b) /
-    exerciseData.length
-  const max = Math.max(exerciseData.map((i) => i.heart_rate.maximum))
+  if (exerciseData.length !== 0) {
+    average =
+      exerciseData.map((i) => i.heart_rate.average).reduce((a, b) => a + b) /
+      exerciseData.length
+
+    max = Math.max(exerciseData.map((i) => i.heart_rate.maximum))
+  }
 
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-      <Beat title={'Avg'} value={average} />
-      <Beat title={'Max'} value={max} />
+      <Heart title={'avg'} value={average} />
+      <Heart title={'max'} value={max} />
     </View>
   )
 }
